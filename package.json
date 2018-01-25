@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint **/*.{js,jsx} --quiet"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,13 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.0",
+    "jest": "^22.1.4",
     "prop-types": "^15.6.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
