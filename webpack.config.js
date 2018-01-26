@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   context: resolve('src'),
@@ -26,12 +27,47 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(js||jsx)$/,
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        use: 'eslint-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.jsx?$/,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|woff|eot|ttf|svg|gif|jpg|jpeg)$/,
+        use: 'url-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(css||scss)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true,
+                sourceMap: true,
+              },
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
+        }),
+      },
     ],
   },
+  plugins: [
+    new ExtractTextPlugin('style.css'),
+  ],
 };
 
 module.exports = config;
